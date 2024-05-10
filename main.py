@@ -1,37 +1,33 @@
 # Python Capstone Project
 # Fitness Center
-#Write a console application for a fitness center to help manage members and membership options.
+# Write a console application for a fitness center to help manage members and membership options.
+import members_clubs
 
-#creates member classes
-class Member:
-    def __init__(self, member_id, name):
-        self.member_id = member_id
-        self.name = name
-    def check_in(self, club):
-        return "void"
+"""
+A main function which takes input from the user:
+Asks a user what they want to do
+Added members should be given the option to select from at least 4 fitness center locations or have the option to be a multi-club member.
+Optional enhancements:
+"""
+club1 = members_clubs.Club('Lakeside Country Club', '1234 Lakeside Ave')
+club2 = members_clubs.Club('Grand Circus Club', '432 Circus Road')
+club3 = members_clubs.Club('Riverside Club','678 River Lane')
+club4 = members_clubs.Club('Oceanside Members Club','3540 Ocean Blvd')
 
-class Single_club_member(Member):
+clubs = [club1, club2, club3, club4]
 
-    def __init__(self, member_id, name, club):
-        Member.__init__(member_id, name)
-        self.club = club
+# def main():
+print('Welcome to GC Fitness Club! ')
 
-    def check_in(self, club):
-        if club != self.club:
-            return "I'm sorry this is the wrong club"
+while True:
+    ans = input('Are you currently a member? (y/n) ')
+    if ans == 'y':
+        name = input('Please enter your name to get started: ')
+    elif ans == 'n':
+        break
+    else:
+        print('try again')
 
-class Multi_club_member:
 
-    def __init__(self, member_id, name, points):
-        Member.__init__(member_id, name)
-        self.points = points
-    def check_in(self, club):
-        self.points += 1
-
-# Create Club Objects
-class Club():
-    Members = []
-
-    def __init__(self, name, address):
-        self.name = name
-        self.address = address
+"""if __init__ == '__main__':
+    main()"""
