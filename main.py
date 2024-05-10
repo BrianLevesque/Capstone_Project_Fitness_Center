@@ -1,16 +1,23 @@
-# This is a sample Python script.
+# Python Capstone Project
+# Fitness Center
+#Write a console application for a fitness center to help manage members and membership options.
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# Create Club Objects
+class Club():
+    Members = []
 
+    def __init__(self, name, address):
+        self.name = name
+        self.address = address
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+# Club 1 
+class Club1(Club):
 
+    def __init__(self, name, address):
+        Club.__init__(self, name, address)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Club 2
+class Club2(Club):
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    def __init__(self, name, address):
+        Club.__init__(self, name, address)
