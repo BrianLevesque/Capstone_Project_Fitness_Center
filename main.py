@@ -1,16 +1,28 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+class Member:
+    def __init__(self, member_id, name):
+        self.member_id = member_id
+        self.name = name
+    def check_in(self, club):
+        return "void"
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+class Single_club_member(Member):
+
+    def __init__(self, member_id, name, club):
+        Member.__init__(member_id, name)
+        self.club = club
+
+    def check_in(self, club):
+        if club != self.club:
+            return "I'm sorry this is the wrong club"
+
+class Multi_club_member:
+
+    def __init__(self, member_id, name, points):
+        Member.__init__(member_id, name)
+        self.points = points
+    def check_in(self, club):
+        self.points += 1
+
