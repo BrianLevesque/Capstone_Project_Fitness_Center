@@ -1,12 +1,14 @@
+# Python Capstone Project
+# Fitness Center
+#Write a console application for a fitness center to help manage members and membership options.
+
+#creates member classes
 class Member:
     def __init__(self, member_id, name):
         self.member_id = member_id
         self.name = name
     def check_in(self, club):
         return "void"
-
-
-
 
 class Single_club_member(Member):
 
@@ -26,3 +28,10 @@ class Multi_club_member:
     def check_in(self, club):
         self.points += 1
 
+# Create Club Objects
+class Club():
+    Members = []
+
+    def __init__(self, name, address):
+        self.name = name
+        self.address = address
