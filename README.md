@@ -30,11 +30,11 @@ This is a program simulating a self-check in kiosk for fitness center members to
 
 ## Authors
 
-Ilackkeya Bhavananthi bsilackkeya21@gmail.com
-Riley Sample rcs622.rcs@gmail.com
-Brian Levesque brian.lev722@gmail.com
+*Ilackkeya Bhavananthi bsilackkeya21@gmail.com
+*Riley Sample rcs622.rcs@gmail.com
+*Brian Levesque brian.lev722@gmail.com
 
 ## Acknowledgments
-Our Grand Circus Instruction Team 
-James Meredith, our main instructor
-Dylan Gleason, our teaching assistant.
+*Our Grand Circus Instruction Team 
+*James Meredith, our main instructor
+*Dylan Gleason, our teaching assistant.
