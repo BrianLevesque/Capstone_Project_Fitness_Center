@@ -23,7 +23,7 @@ This is a program simulating a self-check in kiosk For fitness center members to
 * class Single_club_member
   a child class of member which assigns a member to a particular club and holds a club instance variable
 * class Multi_club_member
-* a child class of member which allows a member to use any club and hold membership points as an instance variable
+  a child class of member which allows a member to use any club and hold membership points as an instance variable
 * class Club
   holds information about a particular club including it's name and address. Also holds a class variable of a list of members for the entire 
   program
@@ -32,8 +32,11 @@ This is a program simulating a self-check in kiosk For fitness center members to
 
 ## Authors
 
-Contributors names and contact info
-
-    * Initial Release
+Ilackkeya Bhavananthi bsilackkeya21@gmail.com
+Riley Sample rcs622.rcs@gmail.com
+Brian Levesque brian.lev722@gmail.com
 
 ## Acknowledgments
+Our Grand Circus Instruction Team 
+James Meredith, our main instructor
+Dylan Gleason, our teaching assistant.
