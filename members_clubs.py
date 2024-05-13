@@ -7,10 +7,10 @@ today = date.today()
 # creates member classes
 class Member:
 
-    def __init__(self, member_id, name):
+    def __init__(self, member_id, name, fee_paid=False):
         self.member_id = member_id
         self.name = name
-        self.fee_paid = False
+        self.fee_paid = fee_paid
 
     def check_in(self):
         return None
@@ -18,13 +18,49 @@ class Member:
     def pay_fee(self):
         self.fee_paid = True
 
+    def pay_fee_signup(self, fee):
+        if today.month == 5:
+            print(f"""Thanks for signing up for GC Fitness Center! 
+As a part of our specials this month, you are eligible for 25% discount, bringing the membership fee to ${fee}!
+Please pay the fee to enjoy your privileges\n""")
+            
+            while True:
+                discounted_fee = fee - (fee * 0.25)
+                #impose 25% discount on membership
+                fee_confirm = input(f"Your discounted fee is ${discounted_fee} for your membership. Please confirm to pay (y/n) \n")
+
+                if fee_confirm == "y":
+                    self.fee_paid = True
+                    print("your payment has been confirmed")
+                    break
+                elif fee_confirm == "n":
+                    print("your payment has been canceled")
+                    break
+                else:
+                    print("please enter a valid response")
+
+        else:
+            while True:
+                fee_confirm = input(f"Your fee is ${fee} for your membership. Please confirm to pay (y/n) \n")
+
+                if fee_confirm == "y":
+                    self.fee_paid = True
+                    print("your payment has been confirmed")
+                    break
+                elif fee_confirm == "n":
+                    print("your payment has been canceled")
+                    break
+                else:
+                    print("please enter a valid response")
+
+
     def __str__(self):
         return f"Member name is {self.name} and the member id is {self.member_id}"
 
 class Single_club_member(Member):
 
-    def __init__(self, member_id, name, club):
-        Member.__init__(self,member_id, name)
+    def __init__(self, member_id, name, club, fee_paid=False):
+        Member.__init__(self,member_id, name, fee_paid)
         self.club = club
 
     def check_in(self, club):
@@ -60,14 +96,14 @@ class Single_club_member(Member):
 
     def __str__(self):
         if self.fee_paid:
-            return f"Member name is {self.name} and the member id is {self.member_id}. Club is {self.club.name}. Your fee has been paid"
+            return f"Member name is {self.name} and the member id is {self.member_id}. Club is {self.club.name}. Your fee has been paid."
         else:
-            return f"Member name is {self.name} and the member id is {self.member_id}. Club is {self.club.name}. Your fee has not been paid"
+            return f"Member name is {self.name} and the member id is {self.member_id}. Club is {self.club.name}. Your fee has not been paid."
 
 class Multi_club_member(Member):
 
-    def __init__(self, member_id, name, points):
-        Member.__init__(self,member_id, name)
+    def __init__(self, member_id, name, fee_paid=False, points=0):
+        Member.__init__(self,member_id, name, fee_paid)
         self.points = points
 
     def check_in(self):

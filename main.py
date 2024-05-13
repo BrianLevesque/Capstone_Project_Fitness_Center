@@ -27,7 +27,7 @@ today = date.today() #today's date
 # checks membership of person
 def check_membership(name):
     for i in mc.Club.Members:
-        if name == i.name:
+        if name.lower() == i.name.lower():
             return True
     return False
 
@@ -64,15 +64,8 @@ def sign_up_single(name):
             if club < len(clubs):
                 new_mem = mc.Single_club_member(member_id, name, clubs[club])
                 mc.Club.Members.append(new_mem)
-                if today.month == 5:
-                    print(f"""Thanks for signing up for GC Fitness Center! 
-As a part of our specials this month, you are eligible for 25% discount, bringing your membership fees to $7.50!
-Please pay the fee to enjoy your privileges\n""")
-                    break
-                else:
-                    print(f"""You have been successfully signed up! 
-    Please pay the fee to enjoy your privileges\n""")
-                    break
+                new_mem.pay_fee_signup(10)
+                break
 
             else:
                 print(f"Please enter a valid number 1-{len(clubs)}")
@@ -86,19 +79,12 @@ def sign_up_multiple(name):
     member_id = len(mc.Club.Members) + 1
     new_mem = mc.Multi_club_member(member_id, name, 0)
     mc.Club.Members.append(new_mem)
-    if today.month == 5:
-        print(f"""Thanks for signing up for GC Fitness Center! 
-As a part of our specials this month, you are eligible for 25% discount, bringing the membership fee to $15!
-Please pay the fee to enjoy your privileges\n""")
-    else:
-        print(f"""You have been successfully signed up! 
-        Please pay the fee to enjoy your privileges\n""")
+    new_mem.pay_fee_signup(20)
 
     return name
 
-
 # Remove members from members list
-def remove_member(club, member):
+def remove_member(member):
     mc.Club.Members.remove(member)
     print(f"{member.name} have been successfully unsubscribed.")
 
@@ -113,16 +99,24 @@ def main():
         ans = input('Are you currently a member? (y/n) \n')
         # if a member
         if ans == 'y':
+            sign_up = 'y'
             name = input("Please enter your name: \n")
             if check_membership(name):  # checks for existing membership
                 break
             else:
                 print("We do not see your membership")
-                while True:  # if not, prompts to sign-up
+                while True:  # sign-up prompt
                     sign_up = input("Would you like to sign up?(y/n) \n")
-                    name = add_member(sign_up)
-                    break
+                    if sign_up == 'y':
+                        name = add_member(sign_up)  # calling add_member function
+                        break
+                    elif sign_up == 'n':
+                        print('Thanks for visiting, goodbye!')
+                        break
+                    else:
+                        print('Please enter valid input')
                 break
+
         # if not a member
         elif ans == 'n':
             while True:  # sign-up prompt
@@ -164,7 +158,7 @@ def main():
                 print('Please enter a valid number\n')
 
         for i in mc.Club.Members:
-            if name == i.name:
+            if name.lower() == i.name.lower():
                 mem = i
 
         # Tasks to be executed based on user interest
@@ -173,7 +167,7 @@ def main():
             for i in clubs:
                 print(f"{j}. {i.name}")
                 j += 1
-            club_check_in = int(input("Which club would you like to check into?(please enter a number) ")) - 1
+            club_check_in = int(input("Which club would you like to check into? (please enter a number) ")) - 1
             mem.check_in(clubs[club_check_in])
             # include statement to prompt check - in again if entered wrong number
 
@@ -204,13 +198,28 @@ def main():
             break
 
         # prompt to continue for other tasks
-        c_task = input("Do you want to continue looking for other options?(y/n)")
-        if c_task == "y":
-            continue
-        else:
-            print("Thanks for visiting us! Have a good day!")
-            break
+        while True:
+            c_task = input("Do you want to continue looking for other options?(y/n)")
+            if c_task == "y":
+                continue
+            elif c_task == 'n':
+                sign_up = 'n'
+                print("Thanks for visiting us! Have a good day!")
+                break
+            else:
+                print("Please enter valid input")
 
+if __name__ == '__main__':
 
-#if __init__ == '__name__':
-main()
+    # preloading club members
+    member1 = mc.Single_club_member(1, 'Riley', club2, fee_paid=True)
+    member2 = mc.Multi_club_member(2, 'Brian', points=543, fee_paid=True)
+    member3 = mc.Single_club_member(3, 'Ilackkeya', club4)
+    mc.Club.Members.append(member1)
+    mc.Club.Members.append(member2)
+    mc.Club.Members.append(member3)
+
+    for i in mc.Club.Members:
+        print(i)
+
+    main()
