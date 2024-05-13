@@ -2,7 +2,7 @@
 # Fitness Center
 # Write a console application for a fitness center to help manage members and membership options.
 import members_clubs as mc
-from datetime import datetime, timedelta, date  # optional enhancement
+from datetime import date  # optional enhancement
 
 """
 A main function which takes input from the user:
@@ -21,8 +21,6 @@ clubs = [club1, club2, club3, club4]
 
 # for allowing users to receive discounts
 today = date.today() #today's date
-day = datetime.now() #present day and time
-end_date = today + timedelta(days=3) #3 days from today
 
 
 # functions for performing user tasks
@@ -66,9 +64,9 @@ def sign_up_single(name):
             if club < len(clubs):
                 new_mem = mc.Single_club_member(member_id, name, clubs[club])
                 mc.Club.Members.append(new_mem)
-                if day.date() >= today and day.date() <= end_date:
-                    print(f"""Thanks for signing up in GC Fitness Center! 
-As a part of our specials this month, you are eligible for 25% discount on your membership fees!
+                if today.month == 5:
+                    print(f"""Thanks for signing up for GC Fitness Center! 
+As a part of our specials this month, you are eligible for 25% discount, bringing your membership fees to $7.50!
 Please pay the fee to enjoy your privileges\n""")
                     break
                 else:
@@ -88,9 +86,9 @@ def sign_up_multiple(name):
     member_id = len(mc.Club.Members) + 1
     new_mem = mc.Multi_club_member(member_id, name, 0)
     mc.Club.Members.append(new_mem)
-    if day.date() >= today and day.date() <= end_date:
-        print(f"""Thanks for signing up in GC Fitness Center! 
-As a part of our specials this month, you are eligible for 25% discount on your membership fees!
+    if today.month == 5:
+        print(f"""Thanks for signing up for GC Fitness Center! 
+As a part of our specials this month, you are eligible for 25% discount, bringing the membership fee to $15!
 Please pay the fee to enjoy your privileges\n""")
     else:
         print(f"""You have been successfully signed up! 

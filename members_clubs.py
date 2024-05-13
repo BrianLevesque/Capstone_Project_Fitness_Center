@@ -1,10 +1,8 @@
 # Holds all objects/ classes for project
-from datetime import datetime, timedelta, date
+from datetime import date
 
 #for allowing users to receive discounts
 today = date.today()
-day = datetime.now()
-end_date = today+ timedelta(days=3)
 
 # creates member classes
 class Member:
@@ -14,7 +12,7 @@ class Member:
         self.name = name
         self.fee_paid = False
 
-    def check_in(self, club):
+    def check_in(self):
         return None
 
     def pay_fee(self):
@@ -44,7 +42,7 @@ class Single_club_member(Member):
         while True:
             fee = 10
             discounted_fee = fee - (fee * 0.25)
-            if day.date() >= today and day.date() <= end_date:
+            if today.month == 5:
                 #impose 25% discount on membership
                 fee_confirm = input(f"Your discounted fee is ${discounted_fee} for a single club membership. Please confirm to pay (y/n) \n")
             else:
@@ -72,7 +70,7 @@ class Multi_club_member(Member):
         Member.__init__(self,member_id, name)
         self.points = points
 
-    def check_in(self, club):
+    def check_in(self):
         if self.fee_paid:
             print("You have been checked in!")
             self.points += 1
@@ -83,7 +81,7 @@ class Multi_club_member(Member):
         while True:
             fee = 20
             discounted_fee = fee - (fee * 0.25)
-            if day.date() >= today and day.date() <= end_date:
+            if today.month == 5:
                 #impose 25% discount on membership
                 fee_confirm = input(f"Your discounted fee is ${discounted_fee} for a  multi-club membership. Please confirm to pay (y/n) \n")
             else:
