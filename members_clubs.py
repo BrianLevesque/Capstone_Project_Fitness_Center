@@ -85,9 +85,9 @@ class Multi_club_member(Member):
             discounted_fee = fee - (fee * 0.25)
             if day.date() >= today and day.date() <= end_date:
                 #impose 25% discount on membership
-                fee_confirm = input(f"Your discounted fee is ${discounted_fee} for a single club membership. Please confirm to pay (y/n) \n")
+                fee_confirm = input(f"Your discounted fee is ${discounted_fee} for a  multi-club membership. Please confirm to pay (y/n) \n")
             else:
-                fee_confirm = input(f"Your fee is ${fee} for a single club membership. Please confirm to pay (y/n) \n")
+                fee_confirm = input(f"Your fee is ${fee} for a multi-club membership. Please confirm to pay (y/n) \n")
 
             if fee_confirm == "y":
                 self.fee_paid = True

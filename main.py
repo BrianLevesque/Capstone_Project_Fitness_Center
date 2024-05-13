@@ -129,30 +129,41 @@ def main():
         elif ans == 'n':
             while True:  # sign-up prompt
                 sign_up = input("Would you like to sign up?(y/n) \n")
-                name = add_member(sign_up)  # calling add_member function
-                break
+                if sign_up == 'y':
+                    name = add_member(sign_up)  # calling add_member function
+                    break
+                elif sign_up == 'n':
+                    print('Thanks for visiting, goodbye!')
+                    break
+                else:
+                    print('Please enter valid input')
             break
 
         else:
             print('Please enter a valid input (y/n) \n')
 
     # start of asking task
-    while True:
-        try:
-            print("Here are the list of options you can do: \n")
-            print("""1. Check in
+    while sign_up == 'y':
+
+        print("Here are the list of options you can do: \n")
+        print("""1. Check in
 2. Pay fee
 3. Display member information
 4. Cancel membership
 5. Add or Become a member 
 6. Quit \n""")
-            like_to_do = int(input("What would you like to do?(Please enter a number) "))
+        while True:
+            try:
+                like_to_do = int(input("What would you like to do?(Please enter a number) "))
 
-            if like_to_do > 6 or like_to_do < 1:
-                print("Please enter a valid number: \n")
+                if like_to_do > 6 or like_to_do < 1:
+                    print("Please enter a valid number between 1 and 6 \n")
 
-        except ValueError:
-            print('Please enter a valid number between 1 and 5: \n')
+                else:
+                    break
+
+            except ValueError:
+                print('Please enter a valid number\n')
 
         for i in mc.Club.Members:
             if name == i.name:
