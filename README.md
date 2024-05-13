@@ -4,7 +4,7 @@ A Self-Check In Kiosk for Fitness Center Members
 
 ## Description
 
-This is a program simulating a self-check in kiosk For fitness center members to manage membership features including becoming a new member, checking in to a fitness center, pay membership fees, displaying membership information, canceling membership, and upgrading membership.
+This is a program simulating a self-check in kiosk for fitness center members to manage membership features including becoming a new member, checking in to a fitness center, pay membership fees, displaying membership information, canceling membership, and upgrading membership.
 
 ### Dependencies
 
