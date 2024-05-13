@@ -86,7 +86,7 @@ def sign_up_multiple(name):
 # Remove members from members list
 def remove_member(member):
     mc.Club.Members.remove(member)
-    print(f"{member.name} have been successfully unsubscribed.")
+    print(f"{member.name} has been successfully unsubscribed.")
 
 
 #upgrade membership changed a membership from single club to multi-club
@@ -153,15 +153,14 @@ def main():
 2. Pay fee
 3. Display member information
 4. Cancel membership
-5. Add or Become a member 
-6. Quit 
-7. Modify membership\n""")
+5. Quit 
+6. Upgrade membership \n""")
         while True:
             try:
                 like_to_do = int(input("What would you like to do? (Please enter a number) \n"))
 
-                if like_to_do > 7 or like_to_do < 1:
-                    print("Please enter a valid number between 1 and 7 \n")
+                if like_to_do > 6 or like_to_do < 1:
+                    print("Please enter a valid number between 1 and 6 \n")
 
                 else:
                     break
@@ -179,8 +178,16 @@ def main():
             for i in clubs:
                 print(f"{j}. {i.name}")
                 j += 1
-            club_check_in = int(input("Which club would you like to check into? (please enter a number) \n")) - 1
-            mem.check_in(clubs[club_check_in])
+            while True:
+                try:
+                    club_check_in = int(input("Which club would you like to check into? (please enter a number) \n")) - 1
+                    if club_check_in < 1 or club_check_in >= len(clubs):
+                        print(f'Please enter a valid number between 1-{len(clubs)}\n')
+                    else:
+                        mem.check_in(clubs[club_check_in])
+                        break
+                except ValueError:
+                    print('Please enter a valid number\n')
 
         elif like_to_do == 2:  # Pay fee
             mem_type = mem.get_type()
@@ -190,23 +197,17 @@ def main():
                 mem.pay_fee(20)
 
         elif like_to_do == 3:  # display user info
-            print(mem)
+            if check_membership(mem.name):
+                print(mem)
+            else:
+                print(f"Sorry there is no member named {mem.name}")
 
         elif like_to_do == 4:  # cancel membership
             remove_member(mem)
+            print("Sorry to see you go! Have a good day!")
+            break
 
-        elif like_to_do == 5:  # Add or Become a member
-            username = input("What is the name of the member to be added? ")
-            member_type = input("Would you like to be a single club member or multi-club member? (s/m) ")
-            if member_type == "s":
-                name = sign_up_single(username)
-            elif member_type == "m":
-                name = sign_up_multiple(username)
-                pass
-            else:
-                print("please enter valid input")
-
-        elif like_to_do == 7: #upgrade membership
+        elif like_to_do == 6: #upgrade membership
             change_membership(mem)
 
         else:  # Quit the app console
@@ -217,13 +218,14 @@ def main():
         while True:
             c_task = input("Do you want to continue looking for other options? (y/n) ")
             if c_task == "y":
-                continue
+                break
             elif c_task == 'n':
                 sign_up = 'n'
                 print("Thanks for visiting us! Have a good day!")
                 break
             else:
                 print("Please enter valid input")
+
 
 if __name__ == '__main__':
 
