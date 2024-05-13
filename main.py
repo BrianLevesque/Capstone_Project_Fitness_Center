@@ -37,7 +37,7 @@ def add_member(char):
     # signs up a new member
     while True:
         if char == "y":
-            member_type = input("Would you like to be a single club member or multi-club member?(s/m)")
+            member_type = input("Would you like to be a single club member or multi-club member? (s/m) \n")
 
             if member_type == "s":  # single_member
                 username = input('Please enter your name to get started: ')
@@ -60,7 +60,7 @@ def sign_up_single(name):
         j += 1
     while True:
         try:
-            club = int(input("Which club would you like to join? (please enter the number)")) - 1
+            club = int(input("Which club would you like to join? (please enter the number) \n")) - 1
             if club < len(clubs):
                 new_mem = mc.Single_club_member(member_id, name, clubs[club])
                 mc.Club.Members.append(new_mem)
@@ -89,6 +89,17 @@ def remove_member(member):
     print(f"{member.name} have been successfully unsubscribed.")
 
 
+#upgrade membership changed a membership from single club to multi-club
+def change_membership(mem):
+    if mem.get_type() == "s":
+        mem1 = mc.Multi_club_member(member_id=mem.member_id, name=mem.name)
+        mc.Club.Members.remove(mem)
+        mc.Club.Members.append(mem1)
+        mem1.pay_fee_signup(10)
+
+    else:
+        print("You are already a Multi-club member.")
+
 def main():
 
     # Welcome message
@@ -100,10 +111,10 @@ def main():
         # if a member
         if ans == 'y':
             sign_up = 'y'
-            name = input("Please enter your name: \n")
+            name = input("Please enter your name: ")
             if check_membership(name):  # checks for existing membership
                 break
-            else:
+            else:  #member is not a member prompts them to sign up
                 print("We do not see your membership")
                 while True:  # sign-up prompt
                     sign_up = input("Would you like to sign up?(y/n) \n")
@@ -120,7 +131,7 @@ def main():
         # if not a member
         elif ans == 'n':
             while True:  # sign-up prompt
-                sign_up = input("Would you like to sign up?(y/n) \n")
+                sign_up = input("Would you like to sign up? (y/n) \n")
                 if sign_up == 'y':
                     name = add_member(sign_up)  # calling add_member function
                     break
@@ -143,13 +154,14 @@ def main():
 3. Display member information
 4. Cancel membership
 5. Add or Become a member 
-6. Quit \n""")
+6. Quit 
+7. Modify membership\n""")
         while True:
             try:
-                like_to_do = int(input("What would you like to do?(Please enter a number) "))
+                like_to_do = int(input("What would you like to do? (Please enter a number) \n"))
 
-                if like_to_do > 6 or like_to_do < 1:
-                    print("Please enter a valid number between 1 and 6 \n")
+                if like_to_do > 7 or like_to_do < 1:
+                    print("Please enter a valid number between 1 and 7 \n")
 
                 else:
                     break
@@ -167,24 +179,25 @@ def main():
             for i in clubs:
                 print(f"{j}. {i.name}")
                 j += 1
-            club_check_in = int(input("Which club would you like to check into? (please enter a number) ")) - 1
+            club_check_in = int(input("Which club would you like to check into? (please enter a number) \n")) - 1
             mem.check_in(clubs[club_check_in])
-            # include statement to prompt check - in again if entered wrong number
 
         elif like_to_do == 2:  # Pay fee
-            mem.pay_fee()
-            print(mem)
+            mem_type = mem.get_type()
+            if mem_type == "s":
+                mem.pay_fee(10)
+            else:
+                mem.pay_fee(20)
 
         elif like_to_do == 3:  # display user info
             print(mem)
 
         elif like_to_do == 4:  # cancel membership
-            remove_member(club1, mem)
-            # mem_club.Club.remove_member(club1, mem)
+            remove_member(mem)
 
         elif like_to_do == 5:  # Add or Become a member
-            username = input("What is the name of the member to be added?")
-            member_type = input("Would you like to be a single club member or multi-club member?(s/m)")
+            username = input("What is the name of the member to be added? ")
+            member_type = input("Would you like to be a single club member or multi-club member? (s/m) ")
             if member_type == "s":
                 name = sign_up_single(username)
             elif member_type == "m":
@@ -193,13 +206,16 @@ def main():
             else:
                 print("please enter valid input")
 
+        elif like_to_do == 7: #upgrade membership
+            change_membership(mem)
+
         else:  # Quit the app console
             print("Thanks for visiting us! Have a good day!")
             break
 
         # prompt to continue for other tasks
         while True:
-            c_task = input("Do you want to continue looking for other options?(y/n)")
+            c_task = input("Do you want to continue looking for other options? (y/n) ")
             if c_task == "y":
                 continue
             elif c_task == 'n':
@@ -218,8 +234,5 @@ if __name__ == '__main__':
     mc.Club.Members.append(member1)
     mc.Club.Members.append(member2)
     mc.Club.Members.append(member3)
-
-    for i in mc.Club.Members:
-        print(i)
 
     main()
