@@ -1,6 +1,6 @@
 # Fitness Center
 
-A Self-Check In Kiosk For Fitness Center Members
+A Self-Check In Kiosk for Fitness Center Members
 
 ## Description
 
