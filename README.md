@@ -6,8 +6,6 @@ A Self-Check In Kiosk For Fitness Center Members
 
 This is a program simulating a self-check in kiosk For fitness center members to manage membership features including becoming a new member, checking in to a fitness center, pay membership fees, displaying membership information, canceling membership, and upgrading membership.
 
-## Getting Started
-
 ### Dependencies
 
 * From the datetime library import the date module.
