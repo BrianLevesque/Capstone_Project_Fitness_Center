@@ -2,7 +2,8 @@
 from datetime import date
 
 # for allowing users to receive discounts
-today = date.today()
+today = date.today()  # today's date
+
 
 # creates member classes
 class Member:
@@ -32,14 +33,13 @@ class Member:
 
     def pay_fee_signup(self, fee): # pays fee for new member and checks for a new member discount
         discounted_fee = fee - (fee * 0.25)
-        if today.month == 5:  # checks to see if it is may for discount
+        if today.month == 5:  # checks to see if it is May for discount
             print(f"""Thanks for signing up for GC Fitness Center! 
 As a part of our specials this month, you are eligible for 25% discount, bringing the membership fee to ${discounted_fee}!
 Please pay the fee to enjoy your privileges\n""")
             
             while True:
-
-                #impose 25% discount on membership
+                # apply 25% discount on membership
                 fee_confirm = input(f"Your discounted fee is ${discounted_fee} for your membership. Please confirm to pay (y/n) \n")
 
                 if fee_confirm == "y":
@@ -66,9 +66,9 @@ Please pay the fee to enjoy your privileges\n""")
                 else:
                     print("please enter a valid response")
 
-
     def __str__(self):
         return f"Member name is {self.name} and the member id is {self.member_id}"
+
 
 class Single_club_member(Member):
 
@@ -76,7 +76,7 @@ class Single_club_member(Member):
         Member.__init__(self,member_id, name, fee_paid)
         self.club = club
 
-    def check_in(self, club):  #checks in member
+    def check_in(self, club):  # checks in the member to a club
         if club == self.club:
             if self.fee_paid:
                 print("You have been checked in!")
@@ -86,7 +86,7 @@ class Single_club_member(Member):
             # prompt to choose properly or cancel check-in
             print("I'm sorry this is the wrong club. Please retry to continue checking in or cancel the check-in")
 
-    def get_type(self): #returns 's' to indicate that this is a single club member
+    def get_type(self):  # returns 's' to indicate that this is a single club member
         return "s"
 
     def __str__(self):
@@ -94,6 +94,7 @@ class Single_club_member(Member):
             return f"Member name is {self.name} and the member id is {self.member_id}. Club is {self.club.name}. Your fee has been paid."
         else:
             return f"Member name is {self.name} and the member id is {self.member_id}. Club is {self.club.name}. Your fee has not been paid."
+
 
 class Multi_club_member(Member):
 
@@ -108,16 +109,18 @@ class Multi_club_member(Member):
         else:
             print("Please pay your fee before checking in.")
 
-    def get_type(self): #returns 'm' to indicate that this is a multi-club member
+    def get_type(self):  # returns 'm' to indicate that this is a multi-club member
         return "m"
+
     def __str__(self):
         if self.fee_paid:
             return f"Member name is {self.name} and the member id is {self.member_id}. Membership points are {self.points} and your fee has been paid"
         else:
             return f"Member name is {self.name} and the member id is {self.member_id}. Membership points are {self.points} and your fee has not been paid"
 
+
 # Create Club Objects
-class Club():
+class Club:
     Members = []
 
     def __init__(self, name, address):
