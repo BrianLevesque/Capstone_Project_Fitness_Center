@@ -1,15 +1,7 @@
 # Python Capstone Project
 # Fitness Center
-# Write a console application for a fitness center to help manage members and membership options.
 import members_clubs as mc
-from datetime import date  # optional enhancement
-
-"""
-A main function which takes input from the user:
-Asks a user what they want to do
-Added members should be given the option to select from at least 4 fitness center locations or have the option to be a multi-club member.
-Optional enhancements:
-"""
+from datetime import date  # optional enhancement to apply discount for new member sign-ups
 
 # creating a list of clubs
 club1 = mc.Club('Lakeside Country Club','1234 Lakeside Ave')
@@ -23,8 +15,8 @@ clubs = [club1, club2, club3, club4]
 today = date.today()  # today's date
 
 
-# functions for performing user tasks
-# checks membership of person
+# Functions for performing user tasks
+# checks membership of a person
 def check_membership(name):
     for i in mc.Club.Members:
         if name.lower() == i.name.lower():
@@ -69,9 +61,9 @@ def sign_up_single(name):
                 mc.Club.Members.append(new_mem) # adding new members to members list
                 new_mem.pay_fee_signup(10)  # calling pay fee sign up function prompting to pay
                 break
-
             else:
                 print(f"Please enter a valid number 1-{len(clubs)}")
+
         except ValueError:
                 print(f"Please enter value number 1-{len(clubs)}")
     return name
@@ -83,8 +75,8 @@ def sign_up_multiple(name):
     new_mem = mc.Multi_club_member(member_id, name, 0)
     mc.Club.Members.append(new_mem) # adding new members to members list
     new_mem.pay_fee_signup(20)  # calling pay fee sign up function prompting to pay
-
     return name
+
 
 # Remove members from members list
 def remove_member(member):
@@ -99,16 +91,16 @@ def change_membership(mem):
         mc.Club.Members.remove(mem)  # removes the existing member from the list
         mc.Club.Members.append(mem1)  # appending the member after changing membership
         mem1.pay_fee_signup(10)
-
     else:
         print("You are already a Multi-club member.")
 
-def main():
 
+def main():
     # Welcome message
     print('Welcome to GC Fitness Club! ')
 
     # Prompts the user if they are a member
+    # Looping through for a valid input
     while True:
         ans = input('Are you currently a member? (y/n) \n')
         # if a member
@@ -119,6 +111,7 @@ def main():
                 break
             else:  # member is not a member prompts them to sign up
                 print("We do not see your membership")
+                # Looping through for a valid input
                 while True:  # sign-up prompt
                     sign_up = input("Would you like to sign up?(y/n) \n")
                     if sign_up == 'y':
@@ -133,13 +126,14 @@ def main():
 
         # if not a member
         elif ans == 'n':
+            # Looping through for a valid input
             while True:  # sign-up prompt
                 sign_up = input("Would you like to sign up? (y/n) \n")
                 if sign_up == 'y':
                     name = add_member(sign_up)  # calling add_member function
                     break
                 elif sign_up == 'n':
-                    print('Thanks for visiting, goodbye!')
+                    print('Thanks for visiting, goodbye!')  # exit message
                     break
                 else:
                     print('Please enter valid input')
@@ -149,6 +143,7 @@ def main():
             print('Please enter a valid input (y/n) \n')
 
     # start of asking task
+    # Looping through for a valid input
     while sign_up == 'y':
 
         print("Here are the list of options you can do: \n")
@@ -159,13 +154,13 @@ def main():
 5. Quit 
 6. Upgrade membership 
 7. Change club (for single club member only) \n""")
+        # Looping through for a valid input
         while True:
             try:
                 like_to_do = int(input("What would you like to do? (Please enter a number) \n"))
 
                 if like_to_do > 7 or like_to_do < 1:
                     print("Please enter a valid number between 1 and 7 \n")
-
                 else:
                     break
 
@@ -182,14 +177,20 @@ def main():
             for i in clubs:
                 print(f"{j}. {i.name}")
                 j += 1
+            # Looping through for a valid input
             while True:
                 try:
                     club_check_in = int(input("Which club would you like to check into? (please enter a number) \n")) - 1
-                    if club_check_in < 1 or club_check_in >= len(clubs):
+                    if club_check_in < 0 or club_check_in >= len(clubs):
                         print(f'Please enter a valid number between 1-{len(clubs)}\n')
                     else:
-                        mem.check_in(clubs[club_check_in])
-                        break
+                        if mem.get_type() == 's':
+                            mem.check_in(clubs[club_check_in])
+                            break
+                        else:
+                            mem.check_in()
+                            break
+
                 except ValueError:
                     print('Please enter a valid number\n')
 
@@ -232,6 +233,7 @@ def main():
 
                     except ValueError:
                         print(f"Please enter value number 1-{len(clubs)}")
+
             else:
                 print("You are already a Multi-club member.")
 
@@ -240,6 +242,7 @@ def main():
             break
 
         # prompt to continue for other tasks
+        # Looping through for a valid input
         while True:
             c_task = input("Do you want to continue looking for other options? (y/n) ")
             if c_task == "y":
