@@ -1,18 +1,18 @@
 # Holds all objects/ classes for project
 from datetime import date
 
-#for allowing users to receive discounts
+# for allowing users to receive discounts
 today = date.today()
 
 # creates member classes
 class Member:
 
-    def __init__(self, member_id, name, fee_paid=False):  #constructor
+    def __init__(self, member_id, name, fee_paid=False):  # constructor
         self.member_id = member_id
         self.name = name
         self.fee_paid = fee_paid
 
-    def check_in(self):  #checks in member
+    def check_in(self):  # checks in member
         return None
 
     def pay_fee(self, fee): # pays fee for member
@@ -32,7 +32,7 @@ class Member:
 
     def pay_fee_signup(self, fee): # pays fee for new member and checks for a new member discount
         discounted_fee = fee - (fee * 0.25)
-        if today.month == 5: #checks to see if it is may for discount
+        if today.month == 5:  # checks to see if it is may for discount
             print(f"""Thanks for signing up for GC Fitness Center! 
 As a part of our specials this month, you are eligible for 25% discount, bringing the membership fee to ${discounted_fee}!
 Please pay the fee to enjoy your privileges\n""")
